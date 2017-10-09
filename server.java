@@ -39,17 +39,8 @@ class UDPServer
         {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
-            String sentence = new String( receivePacket.getData());
-            int num = Integer.parseInt(sentence.trim());
-            if (num == 37)
-            {
-                System.out.println("hello");
-            }
-            else if(num == 38)
-            {
-                System.out.println("bye");
-            }
-            //System.out.println("RECEIVED: " + sentence);
+            printArray(parse(receivePacket.getData()));
+            
 
             InetAddress IPAddress = receivePacket.getAddress();
             int port = receivePacket.getPort();
