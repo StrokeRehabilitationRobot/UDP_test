@@ -3,7 +3,7 @@ import sys
 import base64
 import struct
 import array
-
+import  pickle
 from struct import *
 
 
@@ -11,19 +11,20 @@ from struct import *
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 server_address = ('localhost', 9876)
-message = array.array('d', [6,5])
-message = pack('ffff', 0, 2, 3,4)
+message = pickle.dumps([5,5,5,5,5])
+#print message
+message = pack('<ffff', 0, 2, 3,4)
 
 while 1:
 
 
     # Send data
 
-    print >>sys.stderr, 'sending "%d"' % 37
+    #print >>sys.stderr, 'sending "%d"' % 37
     sent = sock.sendto(message, server_address)
 
     # Receive response
-    print >>sys.stderr, 'waiting to receive'
+    #print >>sys.stderr, 'waiting to receive'
     data, server = sock.recvfrom(4096)
     print array.array('d',data )
 
