@@ -11,11 +11,8 @@ class UDPServer
     static int packetSize;
     static  int numFloats;
     static  ByteOrder be;
-
     static byte[] receiveData;
     static byte[] sendData;
-
-
     static  float[] msg;
 
     public static void main(String args[]) throws Exception
@@ -39,22 +36,11 @@ class UDPServer
         {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
-            String sentence = new String( receivePacket.getData());
-            int num = Integer.parseInt(sentence.trim());
-            if (num == 37)
-            {
-                System.out.println("hello");
-            }
-            else if(num == 38)
-            {
-                System.out.println("bye");
-            }
-            //System.out.println("RECEIVED: " + sentence);
+            //System.out.println(receivePacket.getData());
+            printArray(parse(receivePacket.getData()));
 
             InetAddress IPAddress = receivePacket.getAddress();
             int port = receivePacket.getPort();
-
-
             //   sendData = msg.getBytes();
             DatagramPacket sendPacket =
             new DatagramPacket(sendData, sendData.length, IPAddress, port);
