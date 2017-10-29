@@ -37,7 +37,7 @@ class UDPServer
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
             //System.out.println(receivePacket.getData());
-            printArray(parse(receivePacket.getData()));
+            printArray(receivePacket.getData());
 
             InetAddress IPAddress = receivePacket.getAddress();
             int port = receivePacket.getPort();
@@ -63,8 +63,8 @@ class UDPServer
         float[] returnValues = new float[numFloats];
 
         // println "Parsing packet"
-        for (int i = 0; i < numFloats; i++) {
-            int baseIndex = (4 * i) + 4;
+        for (int i = 0; i < 1; i++) {
+            int baseIndex = i ;
             returnValues[i] = ByteBuffer.wrap(bytes).order(be).getFloat(baseIndex);
         }
 
@@ -75,4 +75,7 @@ class UDPServer
         System.out.println(Arrays.toString(anArray));
     }
 
+    static void printArray(byte[] anArray) {
+        System.out.println(Arrays.toString(anArray));
+    }
 }
